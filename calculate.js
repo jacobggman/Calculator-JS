@@ -72,6 +72,8 @@ function calculateParentheses(tokens) {
             }
             
             const innereParenthesesTokens = popRange(tokens, i, closeIndex);
+            innereParenthesesTokens.shift();  // remove OPEN_PARENTHESES
+            innereParenthesesTokens.pop();  // remove CLOSE_PARENTHESES
             const calculatedToken = calculateTokens(innereParenthesesTokens);
             tokens.splice(i, 0, calculatedToken);
         }
