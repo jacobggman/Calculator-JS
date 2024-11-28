@@ -17,6 +17,9 @@ it.each([
 	["+/(*)-", [new Token(TokensType.ADDITION), new Token(TokensType.DIVISION), 
 		new Token(TokensType.OPEN_PARENTHESES), new Token(TokensType.MULTIPLICATION), 
 		new Token(TokensType.CLOSE_PARENTHESES), new Token(TokensType.SUBTRACTION)]],
+	["-2--2", [new NumberToken(-2), new Token(TokensType.SUBTRACTION), new NumberToken(-2)]],
+	["-2-2", [new NumberToken(-2), new Token(TokensType.SUBTRACTION), new NumberToken(2)]],
+	["2-2", [new NumberToken(2), new Token(TokensType.SUBTRACTION), new NumberToken(2)]],
 ])('shuld return expression result have expression', (expression, expressionResult) => {
 	expect(tokenize(expression)).toEqual(expressionResult);
 });
