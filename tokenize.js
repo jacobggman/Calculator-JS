@@ -162,4 +162,4 @@ class NumberToken extends Token {
     }
 }
 
-export {tokenize, Token, NumberToken, TokenParseException};
+export {tokenize, Token, NumberToken, TokenParseException, TokensType};
