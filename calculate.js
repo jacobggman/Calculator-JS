@@ -29,12 +29,9 @@ function calculateTokens(tokens) {
         throw "Bad Syntax";
     }
 
-    if (tokens[0].type() != TokensType.NUMBER)
-    {
-        throw "Bad Syntax";
-    }
+    validateNumber(tokens[0]);
 
-    return tokens[0]
+    return tokens[0];
 }
 
 function calculateOperations(tokens, operationType, culcFunc) {
@@ -50,12 +47,12 @@ function calculateOperations(tokens, operationType, culcFunc) {
             {
                 throw "Bad Syntax";
             }
-            const leftToken = token[i - 1];
+            const leftToken = tokens[i - 1];
             validateNumber(leftToken);
-            const rightToken = token[i + 1];
+            const rightToken = tokens[i + 1];
             validateNumber(rightToken);
             const result = culcFunc(leftToken.value(), rightToken.value());
-            popRange(token, i - 1, i + 1);
+            popRange(tokens, i - 1, i + 1);
             tokens.splice(i, 0, new NumberToken(result));
         }
     }
@@ -80,6 +77,12 @@ function calculateParentheses(tokens) {
     }
 }
 
+function validateNumber(token) {
+    if (token.type() != TokensType.NUMBER)
+    {
+        throw "Bad Syntax";
+    }
+}
 function findCloseParentheses(tokens, startIndex) {
     for (let i = startIndex; i < tokens.length; i++) {
         const token = tokens[i];
