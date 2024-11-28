@@ -53,6 +53,7 @@ function calculateOperations(tokens, operationType, culcFunc) {
             validateNumber(rightToken);
             const result = culcFunc(leftToken.value(), rightToken.value());
             popRange(tokens, i - 1, i + 1);
+            i--;
             tokens.splice(i, 0, new NumberToken(result));
         }
     }
