@@ -49,11 +49,6 @@ function tokenize(expressionStr) {
     }
 
     return tokens;
-    // each "("" must have ")" after
-
-    // first go to () from left to right
-    // then make * or / left to right
-    // then + - left to right
 }
 
 function checkIfNeedToAddMul(tokenType, tokens) {
