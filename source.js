@@ -1,6 +1,6 @@
 // Syntax error
 // div by 0 error
-import {calculate} from './calculate.js';
+import calculate from './calculate.js';
 
 let display;
 
@@ -16,10 +16,10 @@ function clearDisplay() {
   display.value = '';
 }
 
-function calculate() {
+function calculateInput() {
     display.value = calculate(display.value);
 }
 
-window.calculate = calculate;
+window.calculateInput = calculateInput;
 window.appendValue = appendValue;
 window.clearDisplay = clearDisplay;
