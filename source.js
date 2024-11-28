@@ -2,6 +2,16 @@
 // div by 0 error
 const NUMBERS = "0123456789"
 
+const TokensType = Object.freeze({
+    NUMBER:   Symbol("number"),
+    MULTIPLICATION:  Symbol("multiplication"),
+    DIVISION: Symbol("division"),
+    ADDITION: Symbol("addition"),
+    SUBTRACTION: Symbol("subtraction"),
+    START_PARENTHESES: Symbol("start_parentheses"),
+    END_PARENTHESES: Symbol("end_parentheses"),
+});
+
 const STR_TO_TOKEN_TYPE = new Map();
 STR_TO_TOKEN_TYPE.set("*", TokensType.MULTIPLICATION);
 STR_TO_TOKEN_TYPE.set("/", TokensType.DIVISION);
@@ -27,15 +37,13 @@ function calculate() {
   
 }
 
-const TokensType = Object.freeze({
-    NUMBER:   Symbol("number"),
-    MULTIPLICATION:  Symbol("multiplication"),
-    DIVISION: Symbol("division"),
-    ADDITION: Symbol("addition"),
-    SUBTRACTION: Symbol("subtraction"),
-    START_PARENTHESES: Symbol("start_parentheses"),
-    END_PARENTHESES: Symbol("end_parentheses"),
-});
+class TokenParseException extends Error {
+    constructor(message) {
+      super(message);
+      this.name = this.constructor.name;
+    }
+  }
+  
 
 function tokenize(expressionStr) {
     const tokens = [];
@@ -106,7 +114,7 @@ function tokenizeNumber(expressionStr, startIndex) {
         {
             if (hasDot)
             {
-                throw "Double dot in number";
+                throw new TokenParseException();
             }
             hasDot = true;
         }
@@ -122,12 +130,12 @@ function tokenizeNumber(expressionStr, startIndex) {
     }
     if (!asleastOnChar)
     {
-        throw "Bad number";
+        throw new TokenParseException();
     }
     const number = Number(numAsStr);
     if (number === NaN)
     {
-        throw "Bad number";
+        throw new TokenParseException();
     }
     return index - 1, new Number(number);
 }
