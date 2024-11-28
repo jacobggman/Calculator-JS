@@ -1,6 +1,6 @@
 // Syntax error
 // div by 0 error
-import {tokenize, Token, Number, TokenParseException} from './tokenize.js';
+import {calculate} from './calculate.js';
 
 let display;
 
@@ -17,7 +17,7 @@ function clearDisplay() {
 }
 
 function calculate() {
-  console.log(tokenize(display.value));
+    display.value = calculate(display.value);
 }
 
 window.calculate = calculate;
