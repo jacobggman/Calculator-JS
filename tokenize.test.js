@@ -6,7 +6,14 @@ import {tokenize, Token, NumberToken, TokenParseException, TokensType} from 'tok
 
 it.each([
 	["", []],
-	["6", [new NumberToken(6)]],
+	["62", [new NumberToken(62)]],
+	["062", [new NumberToken(62)]],
+	["-63", [new NumberToken(-63)]],
+	["-063", [new NumberToken(-63)]],
+	["-64.1", [new NumberToken(-64.1)]],
+	["65.1", [new NumberToken(65.1)]],
+	[".16", [new NumberToken(0.16)]],
+	["-.17", [new NumberToken(-0.17)]],
 	["+/(*)-", [new Token(TokensType.ADDITION), new Token(TokensType.DIVISION), 
 		new Token(TokensType.OPEN_PARENTHESES), new Token(TokensType.MULTIPLICATION), 
 		new Token(TokensType.CLOSE_PARENTHESES), new Token(TokensType.SUBTRACTION)]],
