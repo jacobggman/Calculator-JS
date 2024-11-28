@@ -1,4 +1,4 @@
-import {tokenize, NumberToken, TokensType} from 'tokenize.js';
+import {tokenize, NumberToken, TokensType} from './tokenize.js';
 
 export default function calculate(expression) {
     const tokens = tokenize(expression);
