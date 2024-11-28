@@ -28,7 +28,7 @@ class TokenParseException extends Error {
 function tokenize(expressionStr) {
     const tokens = [];
     for (let i = 0; i < expressionStr.length; i++) {
-        const tokenStr = array[i];
+        const tokenStr = expressionStr[i];
         
         if (STR_TO_TOKEN_TYPE.has(tokenStr))
         {
@@ -38,10 +38,12 @@ function tokenize(expressionStr) {
             tokens.push(new Token(tokenType));
         }
         else if (tokenStr == "-") { // can be minus and subtraction
-            [token, i] = tokenizeMinusOrSubtraction(expressionStr, i, tokens);
+            let token;
+            [i, token] = tokenizeMinusOrSubtraction(expressionStr, i, tokens);
             tokens.push(token);
         } else {  // probably a number
-            [token, i] = tokenizeNumber(expressionStr, i);
+            let token;
+            [i, token] = tokenizeNumber(expressionStr, i);
             tokens.push(token);
         }
     }
@@ -118,7 +120,7 @@ function tokenizeNumber(expressionStr, startIndex) {
     {
         throw new TokenParseException();
     }
-    return index - 1, new Number(number);
+    return [index - 1, new NumberToken(number)];
 }
 
 function isLastTokenExpression(tokens) {
@@ -146,10 +148,11 @@ class Token {
     }
 }
 
-class Number extends Token {
+class NumberToken extends Token {
     number
     constructor(number)
     {
+        super();
         this.number = number
         this.tokenType = TokensType.NUMBER
     }
@@ -159,4 +162,4 @@ class Number extends Token {
     }
 }
 
-export {tokenize, Token, Number, TokenParseException};
+export {tokenize, Token, NumberToken, TokenParseException};
