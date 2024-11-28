@@ -6,16 +6,16 @@ const TokensType = Object.freeze({
     DIVISION: Symbol("division"),
     ADDITION: Symbol("addition"),
     SUBTRACTION: Symbol("subtraction"),
-    START_PARENTHESES: Symbol("start_parentheses"),
-    END_PARENTHESES: Symbol("end_parentheses"),
+    OPEN_PARENTHESES: Symbol("open_parentheses"),
+    CLOSE_PARENTHESES: Symbol("close_parentheses"),
 });
 
 const STR_TO_TOKEN_TYPE = new Map();
 STR_TO_TOKEN_TYPE.set("*", TokensType.MULTIPLICATION);
 STR_TO_TOKEN_TYPE.set("/", TokensType.DIVISION);
 STR_TO_TOKEN_TYPE.set("+", TokensType.ADDITION);
-STR_TO_TOKEN_TYPE.set("(", TokensType.START_PARENTHESES);
-STR_TO_TOKEN_TYPE.set(")", TokensType.END_PARENTHESES);
+STR_TO_TOKEN_TYPE.set("(", TokensType.OPEN_PARENTHESES);
+STR_TO_TOKEN_TYPE.set(")", TokensType.CLOSE_PARENTHESES);
 
 class TokenParseException extends Error {
     constructor(message) {
@@ -59,7 +59,7 @@ function tokenize(expressionStr) {
 function checkIfNeedToAddMul(tokenType, tokens) {
     // number(...) == number*(...)
     // (...)(...) == (...)*(...)
-    if (tokenType != TokensType.START_PARENTHESES)
+    if (tokenType != TokensType.OPEN_PARENTHESES)
     {
         return;
     }
@@ -133,7 +133,7 @@ function isLastTokenExpression(tokens) {
     const lastTokenIndex = tokens.length - 1;
     const lastToken = tokens[lastTokenIndex];
     const lastTokenType = lastToken.type();
-    return lastTokenType == TokensType.NUMBER || lastTokenType == TokensType.END_PARENTHESES;
+    return lastTokenType == TokensType.NUMBER || lastTokenType == TokensType.CLOSE_PARENTHESES;
 }
 
 class Token {
