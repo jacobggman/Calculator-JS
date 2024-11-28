@@ -71,7 +71,7 @@ function calculateParentheses(tokens) {
                 throw "Bad Syntax";
             }
             
-            innereParenthesesTokens = popRange(token, i, closeIndex);
+            const innereParenthesesTokens = popRange(tokens, i, closeIndex);
             const calculatedToken = calculateTokens(innereParenthesesTokens);
             tokens.splice(i, 0, calculatedToken);
         }
