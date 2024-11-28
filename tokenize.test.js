@@ -7,6 +7,9 @@ import {tokenize, Token, NumberToken, TokenParseException, TokensType} from 'tok
 it.each([
 	["", []],
 	["6", [new NumberToken(6)]],
+	["+/(*)-", [new Token(TokensType.ADDITION), new Token(TokensType.DIVISION), 
+		new Token(TokensType.OPEN_PARENTHESES), new Token(TokensType.MULTIPLICATION), 
+		new Token(TokensType.CLOSE_PARENTHESES), new Token(TokensType.SUBTRACTION)]],
 ])('shuld return expression result have expression', (expression, expressionResult) => {
 	expect(tokenize(expression)).toEqual(expressionResult);
 });

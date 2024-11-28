@@ -74,7 +74,7 @@ function tokenizeMinusOrSubtraction(expressionStr, i, tokens) {
     // 2--3 = 1 (only two in a row is allow)
     if (isLastTokenExpression(tokens))
     {
-        return [new Token(TokensType.SUBTRACTION), i];
+        return [i, new Token(TokensType.SUBTRACTION)];
     }
     
     return tokenizeNumber(expressionStr, i);
