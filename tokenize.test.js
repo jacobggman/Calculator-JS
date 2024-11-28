@@ -23,3 +23,16 @@ it.each([
 ])('shuld return expression result have expression', (expression, expressionResult) => {
 	expect(tokenize(expression)).toEqual(expressionResult);
 });
+
+
+it.each([
+	["a"],
+	[".1.2"],
+	["-"],
+	["3*-"],
+])('shuld throw ParseExeptions', (expression) => {
+	const t = () => {
+		tokenize(expression);
+	  };
+	expect(t).toThrow(TokenParseException);
+});
