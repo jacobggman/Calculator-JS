@@ -1,5 +1,4 @@
 // TODO:
-// go right when enter long text
 // check if have errors and show it to the screen
 // add , to number
 // show errors when typing (where have bad syntax)
@@ -15,6 +14,7 @@ window.onload = function() {
 
 function appendValue(value) {
   display.value += value;
+  display.scrollLeft = display.scrollWidth;
 }
 
 function clearDisplay() {
