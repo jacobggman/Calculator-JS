@@ -5,6 +5,19 @@ export default function calculate(expression) {
     return calculateTokens(tokens).value();
 }
 
+export class CulcParseException extends Error {
+    constructor(message) {
+      super(message);
+      this.name = this.constructor.name;
+    }
+}
+
+export class DivByZeroException extends Error {
+    constructor(message) {
+      super(message);
+      this.name = this.constructor.name;
+    }
+}
 
 function calculateTokens(tokens) {
 
@@ -16,7 +29,7 @@ function calculateTokens(tokens) {
     calculateOperations(tokens, TokensType.DIVISION, (leftValue, rightValue) => {
         if (rightValue == 0)
         {
-            throw "Div by zero";
+            throw new DivByZeroException();
         }
         return leftValue / rightValue;
     });
@@ -26,7 +39,7 @@ function calculateTokens(tokens) {
 
     if (tokens.length != 1)
     {
-        throw "Bad Syntax";
+        throw new CulcParseException();
     }
 
     validateNumber(tokens[0]);
@@ -46,7 +59,7 @@ function calculateParentheses(tokens) {
         {
             if (startParenthesesStack.length == 0)
             {
-                throw "Bad Syntax";
+                throw new CulcParseException();
             }
 
             const startIndex = startParenthesesStack.pop();
@@ -71,11 +84,11 @@ function calculateOperations(tokens, operationType, culcFunc) {
         {
             if (i == 0)
             {
-                throw "Bad Syntax";
+                throw new CulcParseException();
             }
             if (i == tokens.length)
             {
-                throw "Bad Syntax";
+                throw new CulcParseException();
             }
             const leftToken = tokens[i - 1];
             validateNumber(leftToken);
@@ -92,7 +105,7 @@ function calculateOperations(tokens, operationType, culcFunc) {
 function validateNumber(token) {
     if (token.type() != TokensType.NUMBER)
     {
-        throw "Bad Syntax";
+        throw new CulcParseException();
     }
 }
 
