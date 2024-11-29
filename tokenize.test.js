@@ -20,6 +20,12 @@ it.each([
 	["-2--2", [new NumberToken(-2), new Token(TokensType.SUBTRACTION), new NumberToken(-2)]],
 	["-2-2", [new NumberToken(-2), new Token(TokensType.SUBTRACTION), new NumberToken(2)]],
 	["2-2", [new NumberToken(2), new Token(TokensType.SUBTRACTION), new NumberToken(2)]],
+	[")(", [new Token(TokensType.CLOSE_PARENTHESES), new Token(TokensType.MULTIPLICATION), new Token(TokensType.OPEN_PARENTHESES)]],
+	["1(", [new NumberToken(1), new Token(TokensType.MULTIPLICATION), new Token(TokensType.OPEN_PARENTHESES)]],
+	["-1(", [new NumberToken(-1), new Token(TokensType.MULTIPLICATION), new Token(TokensType.OPEN_PARENTHESES)]],
+	["-1-(", [new NumberToken(-1), new Token(TokensType.SUBTRACTION), new Token(TokensType.OPEN_PARENTHESES)]],
+	["1-(", [new NumberToken(1), new Token(TokensType.SUBTRACTION), new Token(TokensType.OPEN_PARENTHESES)]],
+	// TODO: Add test of multipler ()() and so on.
 ])('shuld return expression result have expression', (expression, expressionResult) => {
 	expect(tokenize(expression)).toEqual(expressionResult);
 });
