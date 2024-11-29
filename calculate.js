@@ -34,31 +34,6 @@ function calculateTokens(tokens) {
     return tokens[0];
 }
 
-function calculateOperations(tokens, operationType, culcFunc) {
-    for (let i = 0; i < tokens.length; i++) {
-        const token = tokens[i];
-        if (token.type() == operationType)
-        {
-            if (i == 0)
-            {
-                throw "Bad Syntax";
-            }
-            if (i == tokens.length)
-            {
-                throw "Bad Syntax";
-            }
-            const leftToken = tokens[i - 1];
-            validateNumber(leftToken);
-            const rightToken = tokens[i + 1];
-            validateNumber(rightToken);
-            const result = culcFunc(leftToken.value(), rightToken.value());
-            popRange(tokens, i - 1, i + 1);
-            i--;
-            tokens.splice(i, 0, new NumberToken(result));
-        }
-    }
-}
-
 function calculateParentheses(tokens) {
     const startParenthesesStack = [];
     for (let i = 0; i < tokens.length; i++) {
@@ -85,6 +60,31 @@ function calculateParentheses(tokens) {
 
             tokens.splice(startIndex, 0, calculatedToken);
             i = startIndex;
+        }
+    }
+}
+
+function calculateOperations(tokens, operationType, culcFunc) {
+    for (let i = 0; i < tokens.length; i++) {
+        const token = tokens[i];
+        if (token.type() == operationType)
+        {
+            if (i == 0)
+            {
+                throw "Bad Syntax";
+            }
+            if (i == tokens.length)
+            {
+                throw "Bad Syntax";
+            }
+            const leftToken = tokens[i - 1];
+            validateNumber(leftToken);
+            const rightToken = tokens[i + 1];
+            validateNumber(rightToken);
+            const result = culcFunc(leftToken.value(), rightToken.value());
+            popRange(tokens, i - 1, i + 1);
+            i--;
+            tokens.splice(i, 0, new NumberToken(result));
         }
     }
 }
