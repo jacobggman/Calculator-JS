@@ -60,22 +60,31 @@ function calculateOperations(tokens, operationType, culcFunc) {
 }
 
 function calculateParentheses(tokens) {
+    const startParenthesesStack = [];
     for (let i = 0; i < tokens.length; i++) {
-        const token = tokens[i];
-        if (token.type() == TokensType.OPEN_PARENTHESES)
+        const tokenType = tokens[i].type();
+        if (tokenType == TokensType.OPEN_PARENTHESES)
         {
-            const closeIndex = findCloseParentheses(tokens, i);
-            // each "("" must have ")" after
-            if (!closeIndex)
+            startParenthesesStack.push(i);
+        }
+        else if (tokenType == TokensType.CLOSE_PARENTHESES)
+        {
+            if (startParenthesesStack.length == 0)
             {
                 throw "Bad Syntax";
             }
+
+            const startIndex = startParenthesesStack.pop();
             
-            const innereParenthesesTokens = popRange(tokens, i, closeIndex);
+            const innereParenthesesTokens = popRange(tokens, startIndex, i);
+            
             innereParenthesesTokens.shift();  // remove OPEN_PARENTHESES
             innereParenthesesTokens.pop();  // remove CLOSE_PARENTHESES
+            
             const calculatedToken = calculateTokens(innereParenthesesTokens);
-            tokens.splice(i, 0, calculatedToken);
+
+            tokens.splice(startIndex, 0, calculatedToken);
+            i = startIndex;
         }
     }
 }
@@ -84,15 +93,6 @@ function validateNumber(token) {
     if (token.type() != TokensType.NUMBER)
     {
         throw "Bad Syntax";
-    }
-}
-function findCloseParentheses(tokens, startIndex) {
-    for (let i = startIndex; i < tokens.length; i++) {
-        const token = tokens[i];
-        if (token.type() == TokensType.CLOSE_PARENTHESES)
-        {
-            return i;
-        }
     }
 }
 
