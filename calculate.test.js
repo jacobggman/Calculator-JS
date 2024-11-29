@@ -2,7 +2,7 @@
 // div by 0 error
 import { expect, it } from 'vitest'
 
-import calculate from 'calculate.js';
+import calculate, {DivByZeroException, CulcParseException} from 'calculate.js';
 
 it.each([
 	["2", 2],
@@ -22,3 +22,25 @@ it.each([
 });
 
 
+it.each([
+	[")"],
+	["++"],
+	["("],
+	["(123))"],
+])('shuld throw CulcParseException', (expression) => {
+	const t = () => {
+		calculate(expression);
+	  };
+	expect(t).toThrow(CulcParseException);
+});
+
+
+it.each([
+	["1/0"],
+	["2(3+1)/(1-1)"],
+])('shuld throw DivByZeroException', (expression) => {
+	const t = () => {
+		calculate(expression);
+	  };
+	expect(t).toThrow(DivByZeroException);
+});
