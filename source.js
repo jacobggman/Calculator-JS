@@ -1,5 +1,10 @@
-// Syntax error
-// div by 0 error
+// TODO:
+// go right when enter long text
+// check if have errors and show it to the screen
+// add , to number
+// show errors when typing (where have bad syntax)
+// make worker for culc
+
 import calculate from './calculate.js';
 
 let display;
