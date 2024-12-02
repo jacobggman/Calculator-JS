@@ -1,8 +1,13 @@
 // TODO:
-// check if have errors and show it to the screen
-// add , to number
-// show errors when typing (where have bad syntax)
-// make worker for culc
+// and add backbutton
+// have curser (for changing other stuff)
+// keyboard support
+// show the result each time that input changed (when click eqwal make the result bigger and the final expression smaller)
+// check infinity
+// don't allow for invalid syntax (like my phone culc)
+// start with zero
+// add , to numbers
+// check if startParenthesesStack is empty
 
 import calculate from './calculate.js';
 import {TokenParseException} from './tokenize.js';
@@ -55,6 +60,9 @@ function calculateInput() {
 }
 
 function updateView() {
+  // split into numbers
+  //  scan each char
+  // for each number add , each 3 digits
   display.value = valueAsStr;
 }
 
