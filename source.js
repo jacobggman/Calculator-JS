@@ -1,22 +1,32 @@
 // TODO:
-// smart control Delete and backspace
 // show the result each time that input changed (when click eqwal make the result bigger and the final expression smaller)
-// don't allow for invalid syntax or errors (like my phone culc)
+// refactor
+// check that still works
 // start with zero
+// don't allow for invalid syntax or errors (like my phone culc)
+// smart control Delete and backspace
 // add , to numbers
 // check if startParenthesesStack is empty
+// add animations (adding, removing, when result change, when use =, when back to culc from =, when change modes)
 
 import calculate from './calculate.js';
 import {TokenParseException} from './tokenize.js';
 import {CulcParseException, DivByZeroException, InfinityException} from './calculate.js';
 
+// when start - hide result field
+// on any change - update result field (and show it)
+// when = - make result big and equation input small
+// when on "= mode" - when add anything, move result field to equation input (and update result field), update equation to big, result to small  
+// when on "= mode" - when click on equation input (or use left or right arrows), update equation to big, result to small
 
 let display;
+let displayResult;
 let valueAsStr = "";
 let isShiftHolded = false;
 
 window.onload = function() {
     display = document.getElementById('display');
+    displayResult = document.getElementById('display-result');
 
     // disable losing focus 
     display.focus();
@@ -46,6 +56,7 @@ function calculateInput() {
   }
 
   try {
+      // TODO change display.value to valueAsStr ?
       valueAsStr = calculate(display.value).toString();
       updateView();
     } catch (error) {
@@ -164,6 +175,7 @@ function updateView() {
   //  scan each char
   // for each number add , each 3 digits
   display.value = valueAsStr;
+  displayResult.value = calculate();
 }
 
 function updateScroll(changeIndex, changeCallback) {

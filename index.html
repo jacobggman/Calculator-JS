@@ -12,6 +12,8 @@
 <body>
     <div class="calculator">
         <input type="text" class="display" id="display" onkeydown="return onKeyDown(event)" onkeyup="return onKeyUp(event)">
+        <input type="text" class="display display-small" id="display-result" disabled>
+
         <div class="buttons">
           <button class="button" onclick="appendValue('7')">7</button>
           <button class="button" onclick="appendValue('8')">8</button>

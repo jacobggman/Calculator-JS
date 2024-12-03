@@ -29,6 +29,13 @@ body {
     box-sizing: border-box;
   }
 
+  .display-small
+  {
+    /* display: none; */
+    height: 35px;
+    font-size: 1rem;
+  }
+
   .buttons {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
