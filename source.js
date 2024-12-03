@@ -28,6 +28,11 @@ import {CulcParseException, DivByZeroException, InfinityException} from './calcu
 // model - the data
 // controller - get the callbacks fron view and logic from model 
 
+
+// Final product questions:
+//  - How I will make sure that the result always valid (except infinit and div by zero)
+//  - 
+
 let display;
 let displayResult;
 let valueAsStr = "";
