@@ -175,7 +175,6 @@ function updateView() {
   //  scan each char
   // for each number add , each 3 digits
   display.value = valueAsStr;
-  displayResult.value = calculate();
 }
 
 function updateScroll(changeIndex, changeCallback) {
