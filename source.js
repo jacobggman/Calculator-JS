@@ -3,11 +3,15 @@
 // refactor
 // check that still works
 // start with zero
-// don't allow for invalid syntax or errors (like my phone culc)
+// don't allow for invalid syntax or errors (like my phone culc) (how to prevent it from deleting in the middile to create invalid expression)
 // smart control Delete and backspace
 // add , to numbers
 // check if startParenthesesStack is empty
 // add animations (adding, removing, when result change, when use =, when back to culc from =, when change modes)
+
+// bugs:
+// copy paste not working
+// select and delete/replace/paste multiple selected text
 
 import calculate from './calculate.js';
 import {TokenParseException} from './tokenize.js';
@@ -18,6 +22,11 @@ import {CulcParseException, DivByZeroException, InfinityException} from './calcu
 // when = - make result big and equation input small
 // when on "= mode" - when add anything, move result field to equation input (and update result field), update equation to big, result to small  
 // when on "= mode" - when click on equation input (or use left or right arrows), update equation to big, result to small
+
+// refactor:
+// view - total callbacks and gui reading and writing
+// model - the data
+// controller - get the callbacks fron view and logic from model 
 
 let display;
 let displayResult;
