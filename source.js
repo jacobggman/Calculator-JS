@@ -66,6 +66,18 @@ function updateView() {
   display.value = valueAsStr;
 }
 
+function deleteOne() {
+  if (!valueAsStr)
+  {
+    return;
+  }
+
+  valueAsStr = valueAsStr.slice(0, valueAsStr.length - 1);
+  updateView();
+}
+
+
 window.calculateInput = calculateInput;
 window.appendValue = appendValue;
 window.clearDisplay = clearDisplay;
+window.deleteOne = deleteOne;
