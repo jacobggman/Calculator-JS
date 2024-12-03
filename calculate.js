@@ -19,6 +19,13 @@ export class DivByZeroException extends Error {
     }
 }
 
+export class InfinityException extends Error {
+    constructor(message) {
+      super(message);
+      this.name = this.constructor.name;
+    }
+}
+
 function calculateTokens(tokens) {
 
     // first go to () from left to right
@@ -106,6 +113,10 @@ function validateNumber(token) {
     if (token.type() != TokensType.NUMBER)
     {
         throw new CulcParseException();
+    }
+    if (token.value() == Infinity)
+    {
+        throw new InfinityException();
     }
 }
 
